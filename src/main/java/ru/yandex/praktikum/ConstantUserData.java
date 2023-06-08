@@ -12,7 +12,7 @@ public class ConstantUserData {
     private final String passwordIncorrect;
 
     public ConstantUserData() {
-        email = RandomStringUtils.randomAlphabetic(5) + "@mail.ru";
+        email = "richard@mail.ru";
         password = "Qazx123";
         name = "Richard";
         passwordIncorrect = RandomStringUtils.randomAlphabetic(5);
@@ -48,5 +48,4 @@ public class ConstantUserData {
     public String getLoginIssue() {
         return LoginIssue;
     }
-
 }

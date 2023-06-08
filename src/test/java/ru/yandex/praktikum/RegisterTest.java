@@ -12,9 +12,9 @@ public class RegisterTest extends GeneralTest {
     @DisplayName("Проверка регистрации с валидными данными")
     @Description("Проверка регистрации с валидными данными>")
     public void RegistrationValidDataTest() {
-        String name = "xxx" + user.getName();
-        String email = "xxx" + user.getEmail();
-        String password = "xxx" + user.getPassword();
+        String name = user.getName();
+        String email = user.getEmail();
+        String password = user.getPassword();
         registerPage = new RegistrationPage(driver);
         registerPage.open();
         registerPage.nameInput(name);

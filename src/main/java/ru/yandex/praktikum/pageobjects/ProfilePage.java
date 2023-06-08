@@ -7,8 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
 public class ProfilePage {
     private final WebDriver driver;
     private final By profileText = By.xpath(".//a[text()='Профиль']");
@@ -22,7 +20,7 @@ public class ProfilePage {
 
     @Step("Нажатие на кнопку Выход на странице личного кабинета")
     public void clickExitButton() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(exitButton));
         driver.findElement(exitButton).click();
     }
@@ -39,7 +37,7 @@ public class ProfilePage {
 
     @Step("Проверка видимости текста Профиль")
     public void checkProfileText() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.visibilityOfElementLocated(profileText));
         Assert.assertTrue(driver.findElement(profileText).isDisplayed());
     }

@@ -9,8 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
 import static ru.yandex.praktikum.Endpoins.MAIN_PAGE;
 
 public class MainPage {
@@ -83,14 +81,14 @@ public class MainPage {
 
     @Step("Проверка видимости текста Соберите бургер")
     public void checkVisibleCollectBurgerText() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.visibilityOfElementLocated(collectBurgerText));
         Assert.assertTrue(driver.findElement(collectBurgerText).isDisplayed());
     }
 
     @Step("Проверка доступности кнопки Оформить заказ")
     public void checkClickableCreateOrderButton() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.elementToBeClickable(createOrderButton));
         Assert.assertTrue(driver.findElement(createOrderButton).isDisplayed());
     }
@@ -100,5 +98,4 @@ public class MainPage {
         driver.findElement(profileButton).click();
         return new LoginPage(driver);
     }
-
 }

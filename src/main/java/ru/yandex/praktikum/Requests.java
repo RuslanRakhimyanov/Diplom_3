@@ -39,4 +39,13 @@ public class Requests {
                 .body("success", equalTo(true))
                 .extract().path("accessToken");
     }
+
+    @Step("Запрос на удаление существующего пользователя")
+    public void deleteUser(String token) {
+        given()
+                .contentType(ContentType.JSON)
+                .auth().oauth2(token)
+                .when()
+                .delete(USER);
+    }
 }

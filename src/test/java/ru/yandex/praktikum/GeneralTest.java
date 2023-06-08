@@ -12,6 +12,7 @@ import static ru.yandex.praktikum.Endpoins.DRIVER_CHROME;
 import static ru.yandex.praktikum.Endpoins.MAIN_PAGE;
 
 public class GeneralTest {
+    WebDriver driver;
     private final Requests requests = new Requests();
     private final ConstantUserData userAccountData = new ConstantUserData();
     private final String userLogin = userAccountData.getLoginIssue();
@@ -22,32 +23,34 @@ public class GeneralTest {
     protected ProfilePage profilePage;
     protected RegistrationPage registerPage;
     protected PasswordRecoveryPage passwordRecoveryPage;
-    protected WebDriver driver;
 
+    private String token;
     @Before
     public void browserChange() {
         if (DRIVER_CHROME) {
             driver = new ChromeDriver();
         } else {
             ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.setBinary(System.getProperty("user.home") + "\\src\\main\\resources\\yandexdriver");
+            chromeOptions.setBinary(System.getProperty("webdriver.yandex.driver",  "C:\\WebDriver\\bin"));
             driver = new ChromeDriver(chromeOptions);
         }
         driver.manage().window().maximize();
         RestAssured.baseURI = MAIN_PAGE;
+        token = null;
     }
 
     @After
-    public void closeDelete() {
+    public void closeBrowser() {
         driver.quit();
+        if (token != null) requests.deleteUser(token.substring(7));
     }
 
     protected void registrTestUser() {
         String json = "{" + userLogin + "\"," + userName + "\"," + userPassword + "\"}";
-        requests.registrUser(json);
+        token = requests.registrUser(json);
     }
 
     protected void loginTestUser(String json) {
-        requests.loginUser(json);
+        token = requests.loginUser(json);
     }
 }

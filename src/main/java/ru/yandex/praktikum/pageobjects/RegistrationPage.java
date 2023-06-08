@@ -7,8 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
 import static ru.yandex.praktikum.Endpoins.REGISTRATION_PAGE;
 
 public class RegistrationPage {
@@ -61,7 +59,7 @@ public class RegistrationPage {
 
     @Step("Проверка текста ошибки онеправильнм пароле")
     public void checkInvalidPasswordText() {
-        new WebDriverWait(driver, Duration.ofSeconds(3))
+        new WebDriverWait(driver, 3)
                 .until(ExpectedConditions.visibilityOfElementLocated(InvalidPasswordText));
         Assert.assertTrue(driver.findElement(InvalidPasswordText).isDisplayed());
     }
