@@ -42,5 +42,4 @@ public class RegisterTest extends GeneralTest {
         registerPage.clickRegistrationButton();
         registerPage.checkInvalidPasswordText();
     }
-
 }

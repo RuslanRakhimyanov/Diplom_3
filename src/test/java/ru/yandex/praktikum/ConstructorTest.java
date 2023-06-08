@@ -36,5 +36,4 @@ public class ConstructorTest extends GeneralTest {
         mainPage.clickFillings();
         mainPage.checkFillingsVisible();
     }
-
 }

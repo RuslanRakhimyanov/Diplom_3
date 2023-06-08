@@ -10,9 +10,9 @@ import static ru.yandex.praktikum.Endpoins.*;
 
 public class Requests {
 
-    @Step("запрос на авторизацию существующего пользователя")
+    @Step("запрос на авторизацию пользователя")
     public String loginUser(String json) {
-        String token = given()
+        return given()
                 .contentType(ContentType.JSON)
                 .body(json)
                 .when()
@@ -23,12 +23,11 @@ public class Requests {
                 .and()
                 .body("success", equalTo(true))
                 .extract().path("accessToken");
-        return token;
     }
 
     @Step("Запрос на создание нового пользователя")
     public String registrUser(String json) {
-        String token = given()
+        return given()
                 .contentType(ContentType.JSON)
                 .body(json)
                 .when()
@@ -39,15 +38,5 @@ public class Requests {
                 .and()
                 .body("success", equalTo(true))
                 .extract().path("accessToken");
-        return token;
-    }
-
-    @Step("Запрос на удаление существующего пользователя")
-    public void deleteUser(String token) {
-        given()
-                .contentType(ContentType.JSON)
-                .auth().oauth2(token)
-                .when()
-                .delete(USER);
     }
 }

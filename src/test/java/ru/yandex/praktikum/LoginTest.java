@@ -69,5 +69,4 @@ public class LoginTest extends GeneralTest {
         mainPage = loginPage.clickSiginButton();
         mainPage.checkClickableCreateOrderButton();
     }
-
 }

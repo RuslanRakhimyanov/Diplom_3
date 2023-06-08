@@ -8,13 +8,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import ru.yandex.praktikum.pageobjects.*;
 
-import java.util.concurrent.TimeUnit;
-
 import static ru.yandex.praktikum.Endpoins.DRIVER_CHROME;
 import static ru.yandex.praktikum.Endpoins.MAIN_PAGE;
 
 public class GeneralTest {
-    private final Requests userClient = new Requests();
+    private final Requests requests = new Requests();
     private final ConstantUserData userAccountData = new ConstantUserData();
     private final String userLogin = userAccountData.getLoginIssue();
     private final String userPassword = userAccountData.getPasswordIssue();
@@ -25,7 +23,6 @@ public class GeneralTest {
     protected RegistrationPage registerPage;
     protected PasswordRecoveryPage passwordRecoveryPage;
     protected WebDriver driver;
-    private String token;
 
     @Before
     public void browserChange() {
@@ -38,31 +35,19 @@ public class GeneralTest {
         }
         driver.manage().window().maximize();
         RestAssured.baseURI = MAIN_PAGE;
-        token = null;
     }
 
     @After
     public void closeDelete() {
-        wait(10);
         driver.quit();
-        if (token != null) userClient.deleteUser(token.substring(7));
     }
 
     protected void registrTestUser() {
         String json = "{" + userLogin + "\"," + userName + "\"," + userPassword + "\"}";
-        token = userClient.registrUser(json);
+        requests.registrUser(json);
     }
 
     protected void loginTestUser(String json) {
-        token = userClient.loginUser(json);
-    }
-
-
-    public void wait(int sec) {
-        try {
-            TimeUnit.SECONDS.sleep(sec);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        requests.loginUser(json);
     }
 }

@@ -77,6 +77,5 @@ public class ProfileTest extends GeneralTest {
         profilePage = new ProfilePage(driver);
         profilePage.clickExitButton();
         loginPage.checkClickableSiginButton();
-
     }
 }
