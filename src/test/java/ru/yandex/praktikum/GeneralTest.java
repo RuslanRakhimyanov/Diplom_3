@@ -30,7 +30,7 @@ public class GeneralTest {
             driver = new ChromeDriver();
         } else {
             ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.setBinary(System.getProperty("user.home") + "\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe");
+            chromeOptions.setBinary(System.getProperty("user.home") + "\\src\\main\\resources\\yandexdriver");
             driver = new ChromeDriver(chromeOptions);
         }
         driver.manage().window().maximize();
