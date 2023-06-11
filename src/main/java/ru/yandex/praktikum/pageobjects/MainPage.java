@@ -1,6 +1,7 @@
 package ru.yandex.praktikum.pageobjects;
 
 import io.qameta.allure.Step;
+import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -9,18 +10,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static org.hamcrest.CoreMatchers.containsString;
+
 import static ru.yandex.praktikum.Endpoins.MAIN_PAGE;
 
 public class MainPage {
     private final WebDriver driver;
     private final By profileButton = By.xpath(".//p[text()='Личный Кабинет']");
     private final By collectBurgerText = By.xpath(".//h1[text()='Соберите бургер']");
-    private final By bunsTab = By.xpath(".//span[text()='Булки']");
-    private final By saucesTab = By.xpath(".//span[text()='Соусы']");
-    private final By fillingsTab = By.xpath(".//span[text()='Начинки']");
-    private final By bunsText = By.xpath(".//h2[text()='Булки']");
-    private final By saucesText = By.xpath(".//h2[text()='Соусы']");
-    private final By fillingsText = By.xpath(".//h2[text()='Начинки']");
+    private final By bunsTab = By.xpath(".//span[text()='Булки']/..");
+    private final By saucesTab = By.xpath(".//span[text()='Соусы']/..");
+    private final By fillingsTab = By.xpath(".//span[text()='Начинки']/..");
     private final By lastTabElement = By.xpath(".//p[text()='Сыр с астероидной плесенью']");
     private final By siginButton = By.xpath(".//button[text()='Войти в аккаунт']");
     private final By createOrderButton = By.xpath(".//button[text()='Оформить заказ']");
@@ -41,15 +41,16 @@ public class MainPage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 
-    @Step("Выбор вкладки <Булки>")
+    @Step("Выбор вкладки Булки")
     public void clickBuns() {
         scrollingTabDown();
         driver.findElement(bunsTab).click();
     }
 
-    @Step("Проверка видимости надписи <Булки>")
-    public void checkBunsVisible() {
-        Assert.assertTrue(driver.findElement(bunsText).isDisplayed());
+    @Step("Проверка, что открыт раздел Булки")
+    public void checkSectionBun() {
+        String text = driver.findElement(bunsTab).getAttribute("class");
+        MatcherAssert.assertThat(text, containsString("tab_tab_type_current__2BEPc"));
     }
 
     @Step("Выбор вкладки Соусы")
@@ -58,9 +59,10 @@ public class MainPage {
         driver.findElement(saucesTab).click();
     }
 
-    @Step("Проверка видимости надписи Соусы")
-    public void checkSaucesVisible() {
-        Assert.assertTrue(driver.findElement(saucesText).isDisplayed());
+    @Step("Проверка, что открыт раздел Соусы")
+    public void checkSectionSauce() {
+        String text = driver.findElement(saucesTab).getAttribute("class");
+        MatcherAssert.assertThat(text, containsString("tab_tab_type_current__2BEPc"));
     }
 
     @Step("Выбор вкладки Начинки")
@@ -68,9 +70,10 @@ public class MainPage {
         driver.findElement(fillingsTab).click();
     }
 
-    @Step("Проверка видимости надписи Начинки")
-    public void checkFillingsVisible() {
-        Assert.assertTrue(driver.findElement(fillingsText).isDisplayed());
+    @Step("Проверка, что открыт раздел Начинки")
+    public void checkSectionFilling() {
+        String text = driver.findElement(fillingsTab).getAttribute("class");
+        MatcherAssert.assertThat(text, containsString("tab_tab_type_current__2BEPc"));
     }
 
     @Step("Нажатие кнопки <Войти в аккаунт> на главной странице")

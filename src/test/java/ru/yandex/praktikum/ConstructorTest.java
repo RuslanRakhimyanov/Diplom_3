@@ -14,7 +14,7 @@ public class ConstructorTest extends GeneralTest {
         mainPage = new MainPage(driver);
         mainPage.open();
         mainPage.clickBuns();
-        mainPage.checkBunsVisible();
+        mainPage.checkSectionBun();
     }
 
     @Test
@@ -24,7 +24,7 @@ public class ConstructorTest extends GeneralTest {
         mainPage = new MainPage(driver);
         mainPage.open();
         mainPage.clickSauces();
-        mainPage.checkSaucesVisible();
+        mainPage.checkSectionSauce();
     }
 
     @Test
@@ -34,6 +34,6 @@ public class ConstructorTest extends GeneralTest {
         mainPage = new MainPage(driver);
         mainPage.open();
         mainPage.clickFillings();
-        mainPage.checkFillingsVisible();
+        mainPage.checkSectionFilling();
     }
 }
